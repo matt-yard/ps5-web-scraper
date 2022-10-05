@@ -19,6 +19,7 @@ const parseHTML = (html) => {
 const fetchAndParse = async (url) => {
   const result = await fetchHTML(url);
 
+  //This grabs the "Add to Cart" button from the page
   let body = parseHTML(result).getElementsByTagName("body")[0];
   let buttonContainer = body.querySelector(".fulfillment-add-to-cart-button");
   const button = buttonContainer.getElementsByTagName("button")[0];
