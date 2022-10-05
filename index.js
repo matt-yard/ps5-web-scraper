@@ -41,14 +41,14 @@ const checkStock = async (url) => {
   }
 };
 
+// This should work with any best buy product url, but I've only tested 4 or 5
+// different products
+
+const bestBuyProductUrl =
+  "https://www.bestbuy.com/site/sony-playstation-5-console/6426149.p";
+
 const bestBuyBot = () => {
-  setInterval(
-    () =>
-      checkStock(
-        "https://www.bestbuy.com/site/sony-playstation-5-console/6426149.p"
-      ),
-    10000
-  );
+  setInterval(() => checkStock(bestBuyProductUrl), 10000);
 };
 
 bestBuyBot();
