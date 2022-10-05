@@ -36,9 +36,7 @@ const checkStock = async (url) => {
     console.log(chalk.red(`${dateObj.toLocaleString()} || SOLD OUT`));
   } else {
     console.log(
-      chalk.green(
-        `${dateObj.toLocaleString()} || IN STOCK || PlayStation 5 || ${url}`
-      )
+      chalk.green(`${dateObj.toLocaleString()} || IN STOCK || ${url}`)
     );
   }
 };
