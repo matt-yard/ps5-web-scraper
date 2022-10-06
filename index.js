@@ -8,7 +8,7 @@ const fetchHTML = async (url) => {
     const { data } = await axios.get(url);
     return data;
   } catch (error) {
-    console.log("UH OH IT WENT HORRIBLY WRONG");
+    console.log("Error when fetching....");
   }
 };
 
@@ -21,9 +21,15 @@ const fetchAndParse = async (url) => {
   const result = await fetchHTML(url);
 
   //This grabs the "Add to Cart" button from the page
-  let body = parseHTML(result).getElementsByTagName("body")[0];
-  let buttonContainer = body.querySelector(".fulfillment-add-to-cart-button");
-  const button = buttonContainer.getElementsByTagName("button")[0];
+  try {
+    // The scraper was crashing randomly when trying to parse, adding try catch
+    // to see if i can figure out why
+    let body = parseHTML(result).getElementsByTagName("body")[0];
+    let buttonContainer = body.querySelector(".fulfillment-add-to-cart-button");
+    const button = buttonContainer.getElementsByTagName("button")[0];
+  } catch (error) {
+    console.log("Error in parsing....");
+  }
 
   return button.text;
 };
