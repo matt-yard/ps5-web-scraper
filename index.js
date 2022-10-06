@@ -61,7 +61,7 @@ const checkStock = async (url) => {
       chalk.green(`${dateObj.toLocaleString()} || IN STOCK || ${url}`)
     );
   } else {
-    console.log(chalk.red(`${dateObj.toLocaleString()} || SOLD OUT`));
+    console.log(chalk.blue(`${dateObj.toLocaleString()} || ERROR PARSING`));
   }
 };
 
