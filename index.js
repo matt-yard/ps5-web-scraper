@@ -24,14 +24,14 @@ const fetchAndParse = async (url) => {
   try {
     // The scraper was crashing randomly when trying to parse, adding try catch
     // to see if i can figure out why
+
     let body = parseHTML(result).getElementsByTagName("body")[0];
     let buttonContainer = body.querySelector(".fulfillment-add-to-cart-button");
     const button = buttonContainer.getElementsByTagName("button")[0];
+    return button.text;
   } catch (error) {
     console.log("Error in parsing....");
   }
-
-  return button.text;
 };
 
 let notificationSent = false;
