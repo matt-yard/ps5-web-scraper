@@ -47,7 +47,7 @@ const checkStock = async (url) => {
   if (result && result == "Sold Out") {
     notificationSent = false;
     console.log(chalk.red(`${dateObj.toLocaleString()} || SOLD OUT`));
-  } else {
+  } else if (result && result !== "Sold Out") {
     if (!notificationSent) {
       notificationSent = true;
       await axios.post("https://api.pushover.net/1/messages.json", {
@@ -60,6 +60,8 @@ const checkStock = async (url) => {
     console.log(
       chalk.green(`${dateObj.toLocaleString()} || IN STOCK || ${url}`)
     );
+  } else {
+    console.log(chalk.red(`${dateObj.toLocaleString()} || SOLD OUT`));
   }
 };
 
