@@ -1,6 +1,7 @@
 const axios = require("axios");
 const { parse } = require("node-html-parser");
 const chalk = require("chalk");
+require("dotenv").config({ path: "./.env" });
 
 const fetchHTML = async (url) => {
   try {
@@ -27,6 +28,8 @@ const fetchAndParse = async (url) => {
   return button.text;
 };
 
+let notificationSent = false;
+
 const checkStock = async (url) => {
   const result = await fetchAndParse(url);
 
@@ -34,8 +37,18 @@ const checkStock = async (url) => {
   let dateObj = new Date(ts);
 
   if (result == "Sold Out") {
+    notificationSent = false;
     console.log(chalk.red(`${dateObj.toLocaleString()} || SOLD OUT`));
   } else {
+    if (!notificationSent) {
+      notificationSent = true;
+      await axios.post("https://api.pushover.net/1/messages.json", {
+        token: process.env.API_TOKEN,
+        user: process.env.USER_KEY,
+        message: "PS5 In Stock Now at BestBuy!",
+        url: "https://www.bestbuy.com/site/sony-playstation-5-console/6426149.p",
+      });
+    }
     console.log(
       chalk.green(`${dateObj.toLocaleString()} || IN STOCK || ${url}`)
     );
