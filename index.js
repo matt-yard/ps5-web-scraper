@@ -9,6 +9,7 @@ const fetchHTML = async (url) => {
     return data;
   } catch (error) {
     console.log("Error when fetching....");
+    return false;
   }
 };
 
@@ -31,6 +32,7 @@ const fetchAndParse = async (url) => {
     return button.text;
   } catch (error) {
     console.log("Error in parsing....");
+    return false;
   }
 };
 
@@ -42,7 +44,7 @@ const checkStock = async (url) => {
   let ts = Date.now();
   let dateObj = new Date(ts);
 
-  if (result == "Sold Out") {
+  if (result && result == "Sold Out") {
     notificationSent = false;
     console.log(chalk.red(`${dateObj.toLocaleString()} || SOLD OUT`));
   } else {
