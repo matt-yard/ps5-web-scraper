@@ -35,6 +35,7 @@ const checkStockBestBuy = async (url) => {
   } else if (result && result !== "Sold Out") {
     if (!notificationSentBestBuy) {
       notificationSentBestBuy = true;
+
       await axios.post("https://api.pushover.net/1/messages.json", {
         token: process.env.API_TOKEN,
         user: process.env.USER_KEY,
@@ -42,6 +43,7 @@ const checkStockBestBuy = async (url) => {
         url: "https://www.bestbuy.com/site/sony-playstation-5-console/6426149.p",
       });
     }
+
     console.log(
       chalk.green(`${dateObj.toLocaleString()} || IN STOCK || ${url}`)
     );
